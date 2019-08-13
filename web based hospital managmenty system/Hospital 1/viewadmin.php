@@ -32,13 +32,13 @@ if(isset($_GET[delid]))
         </thead>
        <tbody>
        <?php
-		$sql ="SELECT * FROM admin";
+		$sql ="SELECT * FROM admin,account WHERE accountId = accId";
 		$qsql = mysqli_query($con,$sql);
 		while($rs = mysqli_fetch_array($qsql))
 		{
         echo "<tr>
-          <td>&nbsp;$rs[adminname]</td>
-          <td>&nbsp;$rs[loginid]</td>
+          <td>&nbsp;$rs[adminName]</td>
+          <td>&nbsp;$rs[username]</td>
           <td>&nbsp;$rs[status]</td>
           <td>&nbsp;
 		  <a href='admin.php?editid=$rs[adminid]'>Edit</a>| <a href='viewadmin.php?delid=$rs[adminid]'>Delete</a> </td>

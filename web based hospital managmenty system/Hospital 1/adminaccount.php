@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['adminid']))
 {
-	echo "<script>window.location='adminlogin.php';</script>";
+	echo "<script>window.location='index.php';</script>";
 }
 include("dbconnection.php");
 include("headers.php");

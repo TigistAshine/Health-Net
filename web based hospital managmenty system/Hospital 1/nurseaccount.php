@@ -1,17 +1,17 @@
 <?php
 session_start();
-if(!isset($_SESSION['receptionid']))
+if(!isset($_SESSION['nurseid']))
 {
-	echo "<script>window.location='receptionlogin.php';</script>";
+	echo "<script>window.location='index.php';</script>";
 }
 include("dbconnection.php");
-include("receptionheader.php");
+include("nurseheader.php");
 ?>
 <div class="wrapper col2">
   <div id="breadcrumb">
 
 <div class="dropdown">
-<strong>reception Dashboard</strong>
+<strong>Nurse Dashboard</strong>
 </div>
 
 

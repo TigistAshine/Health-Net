@@ -18,24 +18,30 @@ if(isset($_POST[submit]))
 	}
 	else
 	{
-	$sql ="INSERT INTO doctor(doctorname,mobileno,departmentid,loginid,password,status,education,experience,consultancy_charge) values('$_POST[doctorname]','$_POST[mobileno]','$_POST[departmentid]','$_POST[loginid]','$_POST[password]','Active','$_POST[education]','$_POST[experience]','$_POST[consultancy_charge]')";
-	if($qsql = mysqli_query($con,$sql))
-	{
-		echo "<script>alert('doctors record inserted successfully...');</script>";
-		$insid= mysqli_insert_id($con);
-		if(isset($_SESSION[adminid]))
+		$role = "Doctor";
+		$status = "Active";
+		$sql ="INSERT INTO account(username,password,role,status) values('$_POST[username]','$_POST[password]','$role','$status')";
+		if($qsql = mysqli_query($con,$sql))
 		{
-			
+			$sql = "SELECT * FROM account WHERE username='$_POST[username]' AND password='$_POST[password]'";
+			$qsql = mysqli_query($con,$sql);
+			$rslogin = mysqli_fetch_array($qsql);
+    		$accId =  $rslogin['accountId'];
+			$sql ="INSERT INTO doctor(doctorname,mobileno,departmentid,education,experience,consultancy_charge,accId) values('$_POST[doctorname]','$_POST[mobileno]','$_POST[departmentid]','$_POST[education]','$_POST[experience]','$_POST[consultancy_charge]','$accId')";
+			if($qsql = mysqli_query($con,$sql))
+			{
+				echo "<script>alert('Doctor record inserted successfully...');</script>";
+			}
+			else
+			{
+				echo mysqli_error($con);
+			}
 		}
 		else
 		{
-		echo "<script>window.location='doctorlogin.php';</script>";	
-		}		
-	}
-	else
-	{
-		echo mysqli_error($con);
-	}
+			echo mysqli_error($con);
+		}
+		
 }
 }
 if(isset($_GET[editid]))
@@ -74,8 +80,8 @@ if(isset($_GET[editid]))
         </tr>
 
         <tr>
-          <td>Login Id</td>
-          <td><input type="text" name="loginid" id="loginid" value="<?php echo $rsedit[loginid]; ?>"  /></td>
+          <td>Username</td>
+          <td><input type="text" name="username" id="username" value="<?php echo $rsedit[username]; ?>"  /></td>
         </tr>
         <tr>
 		<tr>

@@ -18,15 +18,29 @@ if(isset($_POST[submit]))
 	}
 	else
 	{
-	$sql ="INSERT INTO admin(adminname,loginid,password,status) values('$_POST[adminname]','$_POST[loginid]','$_POST[password]','$_POST[select]')";
-	if($qsql = mysqli_query($con,$sql))
-	{
-		echo "<script>alert('Administrator record inserted successfully...');</script>";
-	}
-	else
-	{
-		echo mysqli_error($con);
-	}
+		$role = "Admin";
+		$sql ="INSERT INTO account(username,password,role,status) values('$_POST[username]','$_POST[password]','$role','$_POST[select]')";
+		if($qsql = mysqli_query($con,$sql))
+		{
+			$sql = "SELECT * FROM account WHERE username='$_POST[username]' AND password='$_POST[password]'";
+			$qsql = mysqli_query($con,$sql);
+			$rslogin = mysqli_fetch_array($qsql);
+    		$accId =  $rslogin['accountId'];
+			$sql ="INSERT INTO admin(adminName,accId) values('$_POST[adminname]','$accId')";
+			if($qsql = mysqli_query($con,$sql))
+			{
+				echo "<script>alert('Administrator record inserted successfully...');</script>";
+			}
+			else
+			{
+				echo mysqli_error($con);
+			}
+		}
+		else
+		{
+			echo mysqli_error($con);
+		}
+		
 }
 }
 if(isset($_GET[editid]))
@@ -54,8 +68,8 @@ if(isset($_GET[editid]))
           <td width="66%"><input type="text" name="adminname" id="adminname" value="<?php echo $rsedit[adminname]; ?>"/></td>
         </tr>
         <tr>
-          <td>Login ID</td>
-          <td><input type="text" name="loginid" id="loginid" value="<?php echo $rsedit[loginid]; ?>" /></td>
+          <td>Username</td>
+          <td><input type="text" name="username" id="username" value="<?php echo $rsedit[username]; ?>" /></td>
         </tr>
         <tr>
           <td>Password</td>

@@ -173,18 +173,18 @@ input[type=number]{
   </div> -->
       <div style="text-align:center">
 <?php
-if(isset($_SESSION['adminid']))
+if(isset($_SESSION['receptionid']))
 {
-include("menu.php");
+include("receptionmenu.php");
 }
 if(isset($_SESSION['patientid']))
 {
-include("menu.php");
+include("receptionmenu.php");
 }
-if(isset($_SESSION['doctorid']))
-{
-include("menu.php");
-}
+// if(isset($_SESSION['doctorid']))
+// {
+// include("receptionmenu.php");
+// }
 
 ?>
 </div>
