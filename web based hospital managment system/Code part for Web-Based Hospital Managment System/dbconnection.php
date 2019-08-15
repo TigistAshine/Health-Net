@@ -1,0 +1,11 @@
+<?php
+// Create connection
+// class connectionClass extends mysqli{
+ $con=mysqli_connect("localhost","root","","hospital");
+
+// Check connection
+if (mysqli_connect_errno($con))
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+?>
